@@ -55,7 +55,7 @@ class SQLiteBuilder extends Builder
 
         return $this->connection->getPostProcessor()->processTables(
             $this->connection->selectFromWriteConnection(
-                $this->grammar->compileTables($schema, $withSize)
+                $this->grammar->compileTables($schema)
             )
         );
     }
@@ -84,8 +84,7 @@ class SQLiteBuilder extends Builder
         $table = $this->connection->getTablePrefix().$table;
 
         return $this->connection->getPostProcessor()->processColumns(
-            $this->connection->selectFromWriteConnection($this->grammar->compileColumns($schema, $table)),
-            $this->connection->scalar($this->grammar->compileSqlCreateStatement($schema, $table))
+            $this->connection->selectFromWriteConnection($this->grammar->compileColumns($schema, $table))
         );
     }
 
